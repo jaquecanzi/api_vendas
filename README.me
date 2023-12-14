@@ -1,0 +1,93 @@
+yarn add typescript ts-node-dev @types/node -D
+
+yarn tsc --init --rootDir src --outDir build
+--esModuleInterop --resolveJsonModule --lib es6
+--module commonjs --allowJs true --noImplicitAny true
+
+yarn tsc
+
+"scripts" : {
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts"
+}
+
+manter organização no código:
+    - eslint
+    - editconfig
+    - prettier
+
+        - generate .editconfig
+        -
+          root = true
+          [*]
+          indent_style = space
+          indent_size = 2
+          end_of_line = lf
+          charset = utf-8
+          trim_trailing_whitespace = true
+          insert_final_newline = true
+        - yarn add -D eslint @typescript-eslint/eslint @typescript-eslint/eslint-plugin
+        - generate .eslintrc
+        -
+          {
+            "root": true,
+            "parser": "@typescript-eslint/parser",
+            "plugins": [
+              "@typescript-eslint",
+              "prettier"
+            ],
+            "extends": [
+              "eslint:recommended",
+              "plugin:@typescript-eslint/eslint-recommended",
+              "plugin:@typescript-eslint/recommended",
+              "prettier/@typescript-eslint",
+              "plugin:prettier/recommended"
+            ],
+            "rules": {
+              "no-console": "warn",
+              "prettier/prettier": "error"
+            }
+          }
+    - generate eslintignore
+      node_modules
+      dist
+      build
+      /*.js
+    - script package .json em "scripts"
+      "lint":"eslint . --ext .ts",
+      "lint-fix": "eslint . --ext .ts --fix"
+    - yarn add prettier -D
+    - generate .prettierrc
+      - {
+        "semi": true,
+        "trailingComma": "all",
+        "printWidth": 80,
+        "arrowParens": "avoid"
+        }
+    - yarn add eslint-config-prettier eslint-plugin-prettier -D
+
+ESTRUTURA DO PROJETO:
+   mkdir -p src/config
+    mkdir -p src/modules
+     mkdir -p src/shared/http
+      mk dir src/config
+
+  configurar o tsconfig.json:
+
+    "paths": {
+      "@config/*":[
+        "src/config/*"
+      ],
+      "@modules/*":[
+        "src/modules/*"
+      ],
+      "@shared": [
+        "src/shared/*"
+      ]
+    }
+
+  habilitar o baseurl no tsconfig.json
+
+  yarn add express cors express-async-errors
+  yarn add -D @types/express @types/cors
+
+yarn add typeorm reflect-metadata
