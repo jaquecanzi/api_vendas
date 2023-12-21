@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules ./src/shared/http/server.ts",
     "lint": "eslint . --ext .ts && prettier --check .",
-    "lint-fix": "eslint . --ext .ts --fix && prettier --write ."
+    "lint-fix": "eslint . --ext .ts --fix && prettier --write .",
+    "typeorm": "typeorm-ts-node-commonjs"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -22,12 +23,14 @@
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
+    "pg": "^8.11.3",
     "typeorm": "^0.3.17"
   }
 }
